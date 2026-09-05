@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Know Her Better 💗</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(135deg,#fff0f6,#f3e8ff);color:#251b2b}
+.wrap{max-width:720px;margin:auto;padding:28px 16px 50px}.hero{text-align:center;padding:22px 10px}.hero h1{font-size:34px;margin:0 0 8px}.hero p{margin:0;color:#6d6170}
+.card{background:#ffffffdd;backdrop-filter:blur(10px);border-radius:22px;padding:22px;margin-top:18px;box-shadow:0 12px 35px #5b315b18}
+.q{margin-bottom:22px}.q label{display:block;font-weight:700;margin-bottom:9px}.num{color:#b33c78;margin-right:6px}
+input,textarea,select{width:100%;border:1px solid #e2d5df;border-radius:13px;padding:13px;font:inherit;background:#fff;outline:none}
+input:focus,textarea:focus,select:focus{border-color:#c65a91;box-shadow:0 0 0 3px #c65a9118}
+textarea{min-height:90px;resize:vertical}.submit{width:100%;border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:800;background:#c94382;color:white;cursor:pointer}.submit:disabled{opacity:.6}
+.note{font-size:12px;color:#766a74;text-align:center;margin-top:12px}.success{text-align:center;padding:30px 10px}.hidden{display:none}
+.admin{margin-top:35px;text-align:center}.admin a{color:#9d326b;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div style="font-size:42px">💗</div>
+    <h1>Know Her Better</h1>
+    <p>25 fun questions — answer honestly!</p>
+  </div>
+
+  <div class="card" id="formCard">
+    <form id="quiz"></form>
+  </div>
+
+  <div class="card success hidden" id="success">
+    <div style="font-size:48px">✨</div>
+    <h2>Thank you!</h2>
+    <p>Your answers have been submitted successfully.</p>
+  </div>
+</div>
+
+<script>
+const questions = [
+["Favourite thing in the whole world?","text"],
+["Favourite colour?","text"],
+["Favourite food?","text"],
+["Favourite drink?","text"],
+["Favourite song?","text"],
+["Favourite singer or music artist?","text"],
+["Favourite movie or series?","text"],
+["Favourite actor/actress?","text"],
+["Favourite place to visit?","text"],
+["Favourite flower?","text"],
+["Favourite animal?","text"],
+["What is your favourite hobby?","text"],
+["What do you like doing when you're bored?","text"],
+["What is one thing you absolutely dislike?","text"],
+["What is your biggest pet peeve?","text"],
+["What makes you happy instantly?","text"],
+["What is your biggest fear?","text"],
+["Are you a morning person or a night owl?","select",["Morning person","Night owl","Depends on the day"]],
+["What is your birth date?","date"],
+["How many friends have you made?","number"],
+["Who are you closest to?","text"],
+["What is one dream you really want to achieve?","text"],
+["If you could travel anywhere, where would you go?","text"],
+["What is one thing you wish people understood about you?","textarea"],
+["What is something you want to be asked but nobody asks?","textarea"]
+];
+
+const form=document.getElementById("quiz");
+questions.forEach((q,i)=>{
+  const d=document.createElement("div"); d.className="q";
+  let control="";
+  if(q[1]==="select") control=`<select name="q${i+1}" required><option value="">Choose...</option>${q[2].map(x=>`<option>${x}</option>`).join("")}</select>`;
+  else control=`<${q[1]==="textarea"?"textarea":"input"} ${q[1]!=="textarea"?`type="${q[1]}"`:""} name="q${i+1}" placeholder="Your answer..." required></${q[1]==="textarea"?"textarea":"input"}>`;
+  d.innerHTML=`<label><span class="num">${i+1}.</span>${q[0]}</label>${control}`;
+  form.appendChild(d);
+});
+form.insertAdjacentHTML("beforeend",`<button class="submit" type="submit">Submit Answers 💌</button>
+<div class="note">Your answers will be sent to the person who created this form.</div>`);
+
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const btn=form.querySelector(".submit"); btn.disabled=true; btn.textContent="Submitting...";
+  const answers=Object.fromEntries(new FormData(form).entries());
+  try{
+    const r=await fetch("/api/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(answers)});
+    if(!r.ok) throw new Error();
+    document.getElementById("formCard").classList.add("hidden");
+    document.getElementById("success").classList.remove("hidden");
+  }catch(err){
+    alert("Could not submit. Please try again.");
+    btn.disabled=false; btn.textContent="Submit Answers 💌";
+  }
+});
+</script>
+</body>
+</html>
