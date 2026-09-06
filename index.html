@@ -3,40 +3,250 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Know Her Better 💗</title>
+<title>Wanna Be My Friend Again? 💗</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(135deg,#fff0f6,#f3e8ff);color:#251b2b}
-.wrap{max-width:720px;margin:auto;padding:28px 16px 50px}.hero{text-align:center;padding:22px 10px}.hero h1{font-size:34px;margin:0 0 8px}.hero p{margin:0;color:#6d6170}
-.card{background:#ffffffdd;backdrop-filter:blur(10px);border-radius:22px;padding:22px;margin-top:18px;box-shadow:0 12px 35px #5b315b18}
-.q{margin-bottom:22px}.q label{display:block;font-weight:700;margin-bottom:9px}.num{color:#b33c78;margin-right:6px}
-input,textarea,select{width:100%;border:1px solid #e2d5df;border-radius:13px;padding:13px;font:inherit;background:#fff;outline:none}
-input:focus,textarea:focus,select:focus{border-color:#c65a91;box-shadow:0 0 0 3px #c65a9118}
-textarea{min-height:90px;resize:vertical}.submit{width:100%;border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:800;background:#c94382;color:white;cursor:pointer}.submit:disabled{opacity:.6}
-.note{font-size:12px;color:#766a74;text-align:center;margin-top:12px}.success{text-align:center;padding:30px 10px}.hidden{display:none}
-.admin{margin-top:35px;text-align:center}.admin a{color:#9d326b;font-size:13px}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+  background:linear-gradient(135deg,#fff0f6,#f3e8ff);
+  color:#251b2b;
+}
+
+.wrap{
+  max-width:720px;
+  margin:auto;
+  padding:28px 16px 50px;
+}
+
+.hero{
+  text-align:center;
+  padding:22px 10px;
+}
+
+.hero h1{
+  font-size:34px;
+  margin:0 0 8px;
+}
+
+.hero p{
+  margin:0;
+  color:#6d6170;
+}
+
+.card{
+  background:#ffffffdd;
+  backdrop-filter:blur(10px);
+  border-radius:22px;
+  padding:22px;
+  margin-top:18px;
+  box-shadow:0 12px 35px #5b315b18;
+}
+
+.start{
+  text-align:center;
+  padding:35px 20px;
+}
+
+.start h1{
+  font-size:32px;
+  margin:10px 0;
+}
+
+.start p{
+  color:#6d6170;
+  font-size:16px;
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+  margin-top:25px;
+}
+
+.yes,.no{
+  flex:1;
+  border:0;
+  border-radius:14px;
+  padding:15px;
+  font-size:17px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.yes{
+  background:#c94382;
+  color:white;
+}
+
+.no{
+  background:#eee5ec;
+  color:#4b3d49;
+}
+
+.q{
+  margin-bottom:22px;
+}
+
+.q label{
+  display:block;
+  font-weight:700;
+  margin-bottom:9px;
+}
+
+.num{
+  color:#b33c78;
+  margin-right:6px;
+}
+
+input,textarea,select{
+  width:100%;
+  border:1px solid #e2d5df;
+  border-radius:13px;
+  padding:13px;
+  font:inherit;
+  background:#fff;
+  outline:none;
+}
+
+input:focus,textarea:focus,select:focus{
+  border-color:#c65a91;
+  box-shadow:0 0 0 3px #c65a9118;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.submit{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:15px;
+  font-size:17px;
+  font-weight:800;
+  background:#c94382;
+  color:white;
+  cursor:pointer;
+}
+
+.submit:disabled{
+  opacity:.6;
+}
+
+.note{
+  font-size:12px;
+  color:#766a74;
+  text-align:center;
+  margin-top:12px;
+}
+
+.success{
+  text-align:center;
+  padding:30px 10px;
+}
+
+.hidden{
+  display:none;
+}
 </style>
 </head>
+
 <body>
+
 <div class="wrap">
-  <div class="hero">
-    <div style="font-size:42px">💗</div>
-    <h1>Know Her Better</h1>
-    <p>25 fun questions — answer honestly!</p>
+
+  <!-- FIRST SCREEN -->
+  <div class="card start" id="startCard">
+    <div style="font-size:55px">💗</div>
+
+    <h1>Wanna be my friend again?</h1>
+
+    <p>
+      Maybe we can start again... 🥺
+    </p>
+
+    <div class="buttons">
+      <button class="yes" onclick="showQuestionnaire()">
+        Yes 💗
+      </button>
+
+      <button class="no" onclick="showReason()">
+        No 🥺
+      </button>
+    </div>
   </div>
 
-  <div class="card" id="formCard">
+
+  <!-- QUESTIONNAIRE -->
+  <div class="card hidden" id="formCard">
+
+    <div class="hero">
+      <div style="font-size:42px">💗</div>
+      <h1>Know Her Better</h1>
+      <p>25 fun questions — answer honestly!</p>
+    </div>
+
     <form id="quiz"></form>
+
   </div>
 
-  <div class="card success hidden" id="success">
-    <div style="font-size:48px">✨</div>
-    <h2>Thank you!</h2>
-    <p>Your answers have been submitted successfully.</p>
+
+  <!-- NO / REASON -->
+  <div class="card hidden" id="reasonCard">
+
+    <div class="hero">
+      <div style="font-size:48px">🥺</div>
+      <h1>Can you tell me why?</h1>
+      <p>
+        I won't judge. Just tell me honestly. ❤️
+      </p>
+    </div>
+
+    <form id="reasonForm">
+
+      <textarea
+        name="reason"
+        placeholder="Your reason..."
+        required>
+      </textarea>
+
+      <button class="submit" type="submit">
+        Send Reason 💌
+      </button>
+
+      <div class="note">
+        Your answer will be sent privately.
+      </div>
+
+    </form>
+
   </div>
+
+
+  <!-- SUCCESS -->
+  <div class="card success hidden" id="success">
+
+    <div style="font-size:48px">✨</div>
+
+    <h2>Thank you!</h2>
+
+    <p>
+      Your response has been received. ❤️
+    </p>
+
+  </div>
+
 </div>
 
+
 <script>
+
 const questions = [
+
 ["Favourite thing in the whole world?","text"],
 ["Favourite colour?","text"],
 ["Favourite food?","text"],
@@ -54,7 +264,8 @@ const questions = [
 ["What is your biggest pet peeve?","text"],
 ["What makes you happy instantly?","text"],
 ["What is your biggest fear?","text"],
-["Are you a morning person or a night owl?","select",["Morning person","Night owl","Depends on the day"]],
+["Are you a morning person or a night owl?","select",
+["Morning person","Night owl","Depends on the day"]],
 ["What is your birth date?","date"],
 ["How many friends have you made?","number"],
 ["Who are you closest to?","text"],
@@ -62,57 +273,201 @@ const questions = [
 ["If you could travel anywhere, where would you go?","text"],
 ["What is one thing you wish people understood about you?","textarea"],
 ["What is something you want to be asked but nobody asks?","textarea"]
+
 ];
 
-const form=document.getElementById("quiz");
-questions.forEach((q,i)=>{
-  const d=document.createElement("div"); d.className="q";
-  let control="";
-  if(q[1]==="select") control=`<select name="q${i+1}" required><option value="">Choose...</option>${q[2].map(x=>`<option>${x}</option>`).join("")}</select>`;
-  else control=`<${q[1]==="textarea"?"textarea":"input"} ${q[1]!=="textarea"?`type="${q[1]}"`:""} name="q${i+1}" placeholder="Your answer..." required></${q[1]==="textarea"?"textarea":"input"}>`;
-  d.innerHTML=`<label><span class="num">${i+1}.</span>${q[0]}</label>${control}`;
-  form.appendChild(d);
-});
-form.insertAdjacentHTML("beforeend",`<button class="submit" type="submit">Submit Answers 💌</button>
-<div class="note">Your answers will be sent to the person who created this form.</div>`);
 
+const form=document.getElementById("quiz");
+
+
+questions.forEach((q,i)=>{
+
+  const d=document.createElement("div");
+  d.className="q";
+
+  let control="";
+
+  if(q[1]==="select"){
+
+    control=
+    `<select name="q${i+1}" required>
+      <option value="">Choose...</option>
+      ${q[2].map(x=>`<option>${x}</option>`).join("")}
+    </select>`;
+
+  }else{
+
+    control=
+    `<${q[1]==="textarea"?"textarea":"input"}
+      ${q[1]!=="textarea"?`type="${q[1]}"`:""}
+      name="q${i+1}"
+      placeholder="Your answer..."
+      required>
+    </${q[1]==="textarea"?"textarea":"input"}>`;
+
+  }
+
+  d.innerHTML=
+  `<label>
+    <span class="num">${i+1}.</span>${q[0]}
+  </label>${control}`;
+
+  form.appendChild(d);
+
+});
+
+
+form.insertAdjacentHTML(
+"beforeend",
+`<button class="submit" type="submit">
+Submit Answers 💌
+</button>
+<div class="note">
+Your answers will be sent privately.
+</div>`
+);
+
+
+// YES BUTTON
+function showQuestionnaire(){
+
+  document.getElementById("startCard")
+  .classList.add("hidden");
+
+  document.getElementById("formCard")
+  .classList.remove("hidden");
+
+}
+
+
+// NO BUTTON
+function showReason(){
+
+  document.getElementById("startCard")
+  .classList.add("hidden");
+
+  document.getElementById("reasonCard")
+  .classList.remove("hidden");
+
+}
+
+
+// QUESTIONNAIRE SUBMIT
 form.addEventListener("submit",async e=>{
+
   e.preventDefault();
 
   const btn=form.querySelector(".submit");
+
   btn.disabled=true;
   btn.textContent="Submitting...";
 
-  const answers=Object.fromEntries(new FormData(form).entries());
+  const answers=
+  Object.fromEntries(
+    new FormData(form).entries()
+  );
 
   const payload={
-    _subject:"New Know Her Better 💗 Quiz Response",
+    _subject:"Know Her Better 💗 - Questionnaire Response",
     ...answers
   };
 
   try{
-    const r=await fetch("https://formsubmit.co/ajax/mohansirvi261@gmail.com",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "Accept":"application/json"
-      },
-      body:JSON.stringify(payload)
-    });
+
+    const r=await fetch(
+      "https://formsubmit.co/ajax/mohansirvi261@gmail.com",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "Accept":"application/json"
+        },
+        body:JSON.stringify(payload)
+      }
+    );
 
     const data=await r.json();
 
-    if(!r.ok || data.success===false) throw new Error();
+    if(!r.ok || data.success===false)
+      throw new Error();
 
-    document.getElementById("formCard").classList.add("hidden");
-    document.getElementById("success").classList.remove("hidden");
+    document.getElementById("formCard")
+    .classList.add("hidden");
+
+    document.getElementById("success")
+    .classList.remove("hidden");
 
   }catch(err){
+
     alert("Could not submit. Please try again.");
+
     btn.disabled=false;
     btn.textContent="Submit Answers 💌";
+
   }
+
 });
+
+
+// REASON SUBMIT
+document.getElementById("reasonForm")
+.addEventListener("submit",async e=>{
+
+  e.preventDefault();
+
+  const form=e.target;
+  const btn=form.querySelector(".submit");
+
+  btn.disabled=true;
+  btn.textContent="Sending...";
+
+  const reason=
+  Object.fromEntries(
+    new FormData(form).entries()
+  );
+
+  const payload={
+    _subject:"Know Her Better 💗 - She Said No",
+    ...reason
+  };
+
+  try{
+
+    const r=await fetch(
+      "https://formsubmit.co/ajax/mohansirvi261@gmail.com",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "Accept":"application/json"
+        },
+        body:JSON.stringify(payload)
+      }
+    );
+
+    const data=await r.json();
+
+    if(!r.ok || data.success===false)
+      throw new Error();
+
+    document.getElementById("reasonCard")
+    .classList.add("hidden");
+
+    document.getElementById("success")
+    .classList.remove("hidden");
+
+  }catch(err){
+
+    alert("Could not send. Please try again.");
+
+    btn.disabled=false;
+    btn.textContent="Send Reason 💌";
+
+  }
+
+});
+
 </script>
+
 </body>
 </html>
